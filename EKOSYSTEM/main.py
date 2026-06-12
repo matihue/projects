@@ -16,6 +16,7 @@ class World:
         self.settings = Settings()
         self.width = self.settings.world_width
         self.height = self.settings.world_height
+        self.headless = True
 
         self.chunks = {}
         for x in range(self.width // self.settings.chunk_size + 1):
@@ -211,13 +212,16 @@ while world.settings.running:
 
     world.update_world()
     
-    world.settings.screen.fill(world.settings.background_color)
+    if not world.headless:
+        world.settings.screen.fill(world.settings.background_color)
     
-    world.draw()
+        world.draw()
     
-    world.update_graph()
+        world.update_graph()
     
-    world.graph.draw()
+        world.graph.draw()
         
-    pygame.display.flip()
+        pygame.display.flip()
+    
+    
     world.settings.clock.tick(600) 
